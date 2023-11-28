@@ -18,7 +18,7 @@ import java.util.Locale
 
 private const val VALUES = "values"
 private const val COMMENTS = "comments"
-private const val ALLOWED_PATTERNS = "allowedPatterns"
+private const val ALLOWED_PATTERN = "allowedPattern"
 private const val MESSAGE = "customMessage"
 
 class ForbiddenCommentSpec {
@@ -206,7 +206,7 @@ class ForbiddenCommentSpec {
 
         private val patternsConfig = TestConfig(
             VALUES to "Comment",
-            ALLOWED_PATTERNS to "Ticket|Task",
+            ALLOWED_PATTERN to "Ticket|Task",
         )
 
         @Test

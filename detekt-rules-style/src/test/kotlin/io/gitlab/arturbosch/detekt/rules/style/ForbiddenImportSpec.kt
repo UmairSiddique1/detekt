@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 private const val IMPORTS = "imports"
-private const val FORBIDDEN_PATTERNS = "forbiddenPatterns"
+private const val FORBIDDEN_PATTERN = "forbiddenPatterns"
 
 class ForbiddenImportSpec {
     val code = """
@@ -117,14 +117,14 @@ class ForbiddenImportSpec {
     @Test
     fun `should not report import when it does not match any pattern`() {
         val findings =
-            ForbiddenImport(TestConfig(FORBIDDEN_PATTERNS to "nets.*R")).lint(code)
+            ForbiddenImport(TestConfig(FORBIDDEN_PATTERN to "nets.*R")).lint(code)
         assertThat(findings).isEmpty()
     }
 
     @Test
     fun `should report import when it matches the forbidden pattern`() {
         val findings =
-            ForbiddenImport(TestConfig(FORBIDDEN_PATTERNS to "net.*R|com.*expiremental")).lint(code)
+            ForbiddenImport(TestConfig(FORBIDDEN_PATTERN to "net.*R|com.*expiremental")).lint(code)
         assertThat(findings).hasSize(2)
         assertThat(findings[0].message)
             .isEqualTo("The import `net.example.R.dimen` has been forbidden in the detekt config.")

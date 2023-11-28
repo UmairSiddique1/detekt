@@ -111,7 +111,7 @@ class ForbiddenComment(config: Config = Config.empty) : Rule(config) {
     }
 
     @Configuration("ignores comments which match the specified regular expression. For example `Ticket|Task`.")
-    private val allowedPatterns: Regex by config("", String::toRegex)
+    private val allowedPattern: Regex by config("", String::toRegex)
 
     @Configuration("error message which overrides the default one")
     @Deprecated("Use `comments` and provide `reason` against each `value`.")
@@ -132,7 +132,7 @@ class ForbiddenComment(config: Config = Config.empty) : Rule(config) {
     }
 
     private fun checkForbiddenComment(text: String, comment: PsiElement) {
-        if (allowedPatterns.pattern.isNotEmpty() && allowedPatterns.containsMatchIn(text)) return
+        if (allowedPattern.pattern.isNotEmpty() && allowedPattern.containsMatchIn(text)) return
 
         @Suppress("DEPRECATION")
         values.forEach {
